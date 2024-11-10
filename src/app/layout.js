@@ -1,11 +1,14 @@
+import '../styles/components/animations.css';
 import localFont from "next/font/local";
 import "./globals.css";
+import ToastWrapper from '@/components/ui/Toast';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -20,10 +23,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
+        <ToastWrapper />
       </body>
     </html>
   );
