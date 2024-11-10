@@ -84,7 +84,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-50">
-      {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-100 rounded-full filter blur-3xl opacity-20 -z-10"></div>
       
       <main className="container mx-auto px-4 py-12">
@@ -156,11 +155,16 @@ export default function Home() {
                     {projects.map((project, index) => (
                       <tr
                         key={project.id}
-                        className="hover:bg-gray-50 slide-in"
+                        className="hover:bg-gray-50 slide-in group cursor-pointer"
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{project.name}</div>
+                        <td 
+                          className="px-6 py-4 whitespace-nowrap"
+                          onClick={() => window.location.href = `/projects-file?id=${project.id}`}
+                        >
+                          <div className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                            {project.name}
+                          </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-600">
@@ -169,7 +173,10 @@ export default function Home() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
-                            onClick={() => handleDeleteProject(project.id, project.name)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteProject(project.id, project.name);
+                            }}
                             className="text-red-500 hover:text-red-700 transition-colors hover-scale inline-block px-3 py-1 rounded"
                           >
                             Delete
